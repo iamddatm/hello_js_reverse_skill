@@ -18,6 +18,8 @@
 | `acw_sc__v2` / Aliyun WAF | 签名型 | (待建) | (待建) |
 | `FSSBBIl1UgzbN7N` / `_RSG` / 200KB 混淆 JS + 412 | 签名型（RS） | 同 nmpa 案例 | sdenv |
 | `obfuscator.io` 特征（`_0x` 大量前缀） | 纯混淆线索 | (无专案，按当前问题选静态分析/四板斧步骤) | AST 反混淆与行为对照 |
+| `pinduoduo.com` / `anti-content` / `anti_content` / `0at` 前缀 / `getAntiContent` / `JVM2` | 行为型（JSVMP） | [`jsvmp-pdd-anti-content-vm-sandbox-transport-risk.md`](./jsvmp-pdd-anti-content-vm-sandbox-transport-risk.md) | Node vm 沙箱执行原版模块 53636 + curl_cffi（注意传输层风控 40001/54001） |
+| `h5api.m.1688.com` / `h5api.m.taobao.com` / `_m_h5_tk` / `lib-mtop` / `RGV587` / `FAIL_SYS_TOKEN_EMPTY` | 行为型（签名）+ 传输层风控 | [`mtop-h5-sign-md5-token-handshake-x5sec.md`](./mtop-h5-sign-md5-token-handshake-x5sec.md) | 纯协议 .NET/Python：MD5(token&t&appKey&data) + 令牌握手 + x5sec 信誉窗口对照法 |
 | `douyongxin.com` / `douzhanggui` / `Cores(function` / `Compression v3.0` / `this.d` / query 五件套 `timestamp&client&userid&subId&sign` / `DOU_` localStorage 前缀 | 纯混淆（无环境检测） | [`obf-cores-loader-custom-base64-table-md5-sign.md`](./obf-cores-loader-custom-base64-table-md5-sign.md) | 双层自定义 Base64 解表 + 离线重放 21/21 + 吞包 Hook 取证，纯协议 .NET 10 |
 
 ### 使用方式
