@@ -18,6 +18,7 @@
 | `acw_sc__v2` / Aliyun WAF | 签名型 | (待建) | (待建) |
 | `FSSBBIl1UgzbN7N` / `_RSG` / 200KB 混淆 JS + 412 | 签名型（RS） | 同 nmpa 案例 | sdenv |
 | `obfuscator.io` 特征（`_0x` 大量前缀） | 纯混淆线索 | (无专案，按当前问题选静态分析/四板斧步骤) | AST 反混淆与行为对照 |
+| `douyongxin.com` / `douzhanggui` / `Cores(function` / `Compression v3.0` / `this.d` / query 五件套 `timestamp&client&userid&subId&sign` / `DOU_` localStorage 前缀 | 纯混淆（无环境检测） | [`obf-cores-loader-custom-base64-table-md5-sign.md`](./obf-cores-loader-custom-base64-table-md5-sign.md) | 双层自定义 Base64 解表 + 离线重放 21/21 + 吞包 Hook 取证，纯协议 .NET 10 |
 
 ### 使用方式
 
@@ -50,6 +51,7 @@ AST 属性过滤同时约束方法调用，对象过滤支持 `this.bytecode` �
 | [per-build-polymorphic-vmp-and-composite-gate-ablation.md](per-build-polymorphic-vmp-and-composite-gate-ablation.md) | **[v3.16 新，已脱敏]** 按会话重编译多态 JSVMP、运行期窗口自证提密钥、`Error.stack` 跨引擎对齐与联合门禁金标准二分消融 | ★★★★★ | R3+R1：结构正则跨构建观测 + 运行期窗口频次与同次密文自证提密钥 + Step 0 自证与金标准折半消融 | 不分类 |
 | [eval-packer-unwrapping-and-multilayer-codec-separation.md](eval-packer-unwrapping-and-multilayer-codec-separation.md) | **[v3.17 新，已脱敏]** 动态 `eval` 打包壳脱壳、参数/信封/响应三层独立密钥域隔离、Latin-1 二次 UTF-8 膨胀判读与单次会话配额边界 | ★★★★ | R3+R1：离线沙箱接管动态入口脱壳 + `jsdom` 标定绑定会话与 UA 的流式信封 + 静态表与 `zlib` 响应解码 | 不分类 |
 | [custom-b64-envelope-dual-gen-vmp-and-container-disassembly.md](custom-b64-envelope-dual-gen-vmp-and-container-disassembly.md) | **[v3.17 新，已脱敏]** 自定义换表 Base64 明文 JSON 信封、双代 JSVMP 前缀判读、字节码容器（魔数/隐写掩码/前缀码常量池）拆解与 `jsdom` 离线出值 | ★★★★ | R3+R0：三层状态码分层归因 + `[i<<2,0,0]` 探针提表 + `setter` 捕获覆盖式全局容器 + 最小宿主容错离线运行原始实体 | 不分类 |
+| [obf-cores-loader-custom-base64-table-md5-sign.md](obf-cores-loader-custom-base64-table-md5-sign.md) | **[新]** Cores(fengs) AMD 加载器 + "Compression v3.0" 双层自定义 Base64 字符串表 + query 内 MD5 签名（抖掌柜系电商 SaaS） | ★★ | 离线解表反混淆（字母表从 loader 双字符 token 推导）+ 吞包 Hook / encodeURIComponent 截获取签名原文 + 纯协议 .NET 10 交付 | 纯混淆 |
 
 [historical-experience-rules.md](historical-experience-rules.md) 是 v3.10 之前的 30 条经验法则原文，含大量单站结论，只作历史追溯，每条的现状见 [旧规则去向](../references/experience-rules-full.md)。
 
@@ -69,6 +71,7 @@ AST 属性过滤同时约束方法调用，对象过滤支持 `this.bytecode` �
 | 每次拉取脚本字节哈希与 opcode 编号均变化 + 内嵌会话分组密钥 + 多槽联合门禁 | per-build-polymorphic-vmp-and-composite-gate-ablation | 中（结构正则跨构建定位、运行期窗口自证提密钥与金标准折半消融） |
 | 外层 `eval(function(...){...})` 多脚本包 + 请求/响应异或密钥流互不通 + Base64 解码约 `1.5×` 膨胀 | eval-packer-unwrapping-and-multilayer-codec-separation | 中（离线动态脱壳、三层独立编解码隔离与单次会话配额判读） |
 | 固定前缀 64 字符集外层信封可解明文 JSON + 内层双代版本前缀并存 + 覆盖式全局容器与空种子 9 字符退化串 | custom-b64-envelope-dual-gen-vmp-and-container-disassembly | 中（`[i<<2,0,0]` 探针提表、多状态码分层归因、容器拆解与 `jsdom` 离线出值） |
+| `Compression v3.0` + `Cores(` + query 五件套 timestamp&client&userid&subId&sign | obf-cores-loader-custom-base64-table-md5-sign | 高（抖掌柜系同款加载器栈） |
 
 ## 变体关系图
 
